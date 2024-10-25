@@ -1,0 +1,66 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: rgb(247, 247, 247);
+  width: 20%;
+  margin: 200px auto auto;
+  border-radius: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.login-title,
+.login-register {
+  padding: 30px 20px 30px 20px;
+  color: rgb(100, 100, 100);
+}
+
+.login-title {
+  font-size: 20px;
+}
+.login-register {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+label {
+  margin: 20px 0 5px 0;
+  font-size: 15px;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border: 3px solid rgba(0, 0, 255, 0.226);
+}
+
+input[type="submit"] {
+  width: 100%;
+  background-color: blue;
+  color: white;
+  padding: 14px 20px;
+  margin: 20px 0 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px 0 20px;
+  background-color: white;
+  border-top: 2px solid lightgray;
+  border-bottom: 2px solid lightgray;
+  height: auto;
+}
