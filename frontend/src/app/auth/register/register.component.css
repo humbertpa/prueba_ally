@@ -1,0 +1,77 @@
+.register-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 200px auto auto;
+  border-radius: 5px;
+  background-color: rgb(247, 247, 247);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.register-title,
+.register-login {
+  padding: 30px 20px 30px 20px;
+  color: rgb(100, 100, 100);
+}
+
+.register-title {
+  font-size: 20px;
+}
+.register-login {
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
+}
+
+label {
+  margin: 20px 0 5px 0;
+  font-size: 15px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus {
+  outline: none;
+  border: 3px solid rgba(0, 0, 255, 0.226);
+}
+
+.passwords {
+  display: flex;
+  width: 100%;
+  padding: 15px 0 0 0;
+  column-gap: 15px;
+  div {
+    width: 50%;
+  }
+}
+
+input[type="submit"] {
+  width: 100%;
+  background-color: rgb(1, 94, 237);
+  color: white;
+  padding: 14px 20px;
+  margin: 20px 0 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px 0 20px;
+  background-color: white;
+  border-top: 2px solid lightgray;
+  border-bottom: 2px solid lightgray;
+  height: auto;
+}

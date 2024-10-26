@@ -1,1 +1,26 @@
-<p>register works!</p>
+<div class="register-container">
+    <div class="register-title">
+        Crear Cuenta
+    </div>
+    <form #nuevo_usuario="ngForm" (ngSubmit)="register(nuevo_usuario)">
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" placeholder="Ingrese nombre completo" required>
+        <div class="passwords">
+            <div>
+                <label for="password">Password</label>
+                <input type="password" name="password" placeholder="Ingrese password" required>
+            </div>
+            <div>
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" name="confirm-password" placeholder="Confirme password" required>
+            </div>
+        </div>
+        <label for="email">Email</label>
+        <input type="email" name="email" placeholder="Ingrese email" required>
+        <input type="submit" value="Crear Cuenta">
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    </form>
+    <div class="register-login">
+        <a href="/login">Ya tienes cuenta? Inicia sesión</a>
+    </div>
+</div>
