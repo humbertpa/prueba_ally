@@ -4,11 +4,11 @@ import axios from 'axios';
 import { environment } from 'src/environments/environment.development';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-clima',
+  templateUrl: './clima.component.html',
+  styleUrls: ['./clima.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class ClimaComponent implements OnInit {
 
   paises: string[] = ['Mexico', 'Alemania', 'Francia']
   banderas: string[] = ['../../assets/banderas/mexico.png', '../../assets/banderas/alemania.png', '../../assets/banderas/francia.png']

@@ -1,8 +1,6 @@
 const express = require('express');
 const rutas = require('./routes');
-const cors = require('cors');
 const mysql = require('mysql2/promise');
-const { createPool } = require('mysql2-promise');
 require('dotenv').config();
 
 const bodyParser = require('body-parser');
@@ -25,6 +23,7 @@ const db = mysql.createPool({
     queueLimit: 0
 });
 
+app.use('', rutas);
 
 app.get("/ping", async (req, res) => {
     try {
@@ -37,7 +36,7 @@ app.get("/ping", async (req, res) => {
     }
 });
 
-/* app.use('', rutas); */
+
 
 
 app.listen(3000)
