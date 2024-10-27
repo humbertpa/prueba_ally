@@ -1,1 +1,65 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+    
+    <div class="background-container">
+        <div class="caja fondo"></div>
+    </div>
+
+    <aside class="sidebar">
+        <ul>
+            <li>Dashboards</li>
+            <li>Weather</li>
+            <li>Usuarios</li>
+        </ul>
+    </aside>
+    <div class="column">
+        <div class="card">
+            <h3>PAIS SELECCIONADO</h3>
+            <ul>
+                <li>{{capital.country}}</li>
+                <li>{{"Capital: "+capital.name}}</li>
+                <li>{{"Region: "+capital.region}}</li>
+                <li>{{"Latitud: "+capital.lat}} {{"Longitud: "+capital.lon}}</li>
+
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Otras tareas</h3>
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            <h3>CLIMA</h3>
+            <div class="clima">
+                <img src="{{clima.condition.icon}}" alt="">
+                <ul>
+                    <li>{{clima.temp_c+'°C'}}</li>
+                    <li>{{clima.condition.text}}</li>
+                </ul>
+
+            </div>
+        </div>
+        <div class="card">
+            <h3>Zonas horarias disponibles</h3>
+            <ul>
+                <li *ngFor="let zona of zonas" (click)="obtenerHora(zona)">{{zona}}</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Hora</h3>
+            <ul>
+                <li>{{hora.fecha}}</li>
+                <li>{{hora.zona}}</li>
+            </ul>
+
+
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            <h3>PAISES DISPONIBLES</h3>
+            <ul>
+                <li *ngFor="let pa of paises" (click)='obtenerClima(pa)'>{{pa}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
