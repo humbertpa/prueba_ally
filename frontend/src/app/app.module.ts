@@ -11,7 +11,6 @@ import { FormsModule } from '@angular/forms';
 import { ClimaComponent } from './dashboard/clima/clima.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UsuariosComponent } from './dashboard/usuarios/usuarios.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +28,7 @@ import { UsuariosComponent } from './dashboard/usuarios/usuarios.component';
     BrowserModule,
     FormsModule,
     BrowserModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,10 +3,12 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UsuariosService } from 'src/app/shared/services/usuarios.service';
 
+
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.css']
+
 })
 export class UsuariosComponent implements OnInit {
 
