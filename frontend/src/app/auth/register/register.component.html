@@ -1,26 +1,70 @@
 <div class="register-container">
-    <div class="register-title">
-        Crear Cuenta
+  <div class="register-title">Crear Cuenta</div>
+  <form #nuevo_usuario="ngForm" (ngSubmit)="register(nuevo_usuario)" novalidate>
+    <label for="nombre">Nombre</label>
+    <input
+      type="text"
+      name="nombre"
+      ngModel
+      placeholder="Ingrese nombre completo"
+      required
+    />
+    <div
+      *ngIf="
+        nuevo_usuario.controls['nombre']?.invalid &&
+        (nuevo_usuario.controls['nombre']?.touched || nuevo_usuario.submitted)
+      "
+      class="error-message"
+    >
+      El nombre es obligatorio.
     </div>
-    <form #nuevo_usuario="ngForm" (ngSubmit)="register(nuevo_usuario)">
-        <label for="nombre">Nombre</label>
-        <input type="text" name="nombre" ngModel placeholder="Ingrese nombre completo" required>
-        <div class="passwords">
-            <div>
-                <label for="password">Password</label>
-                <input type="password" name="password" ngModel placeholder="Ingrese password" required>
-            </div>
-            <div>
-                <label for="confirm-password">Confirm Password</label>
-                <input type="password" name="confirm-password" ngModel placeholder="Confirme password" required>
-            </div>
-        </div>
-        <label for="email">Email</label>
-        <input type="email" name="email" ngModel placeholder="Ingrese email" required>
-        <input type="submit" value="Crear Cuenta">
-        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-    </form>
-    <div class="register-login">
-        <a href="/login">Ya tienes cuenta? Inicia sesión</a>
+
+    <div class="passwords">
+      <div>
+        <label for="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          ngModel
+          placeholder="Ingrese password"
+          required
+        />
+      </div>
+      <div>
+        <label for="confirm_password">Confirm Password</label>
+        <input
+          type="password"
+          name="confirm_password"
+          ngModel
+          placeholder="Confirme password"
+          required
+        />
+      </div>
     </div>
+    <div *ngIf="noMatch" class="error-message">
+      Las contraseñas no coinciden
+    </div>
+    <label for="email">Email</label>
+    <input
+      type="email"
+      name="email"
+      ngModel
+      placeholder="Ingrese email"
+      required
+    />
+
+    <div
+      *ngIf="
+        nuevo_usuario.controls['email']?.invalid &&
+        (nuevo_usuario.controls['email']?.touched || nuevo_usuario.submitted)
+      "
+      class="error-message"
+    >
+      Debe ingresar un correo electrónico válido.
+    </div>
+    <input type="submit" value="Crear Cuenta" />
+  </form>
+  <div class="register-login">
+    <a href="/login">Ya tienes cuenta? Inicia sesión</a>
+  </div>
 </div>

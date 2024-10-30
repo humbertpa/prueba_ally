@@ -15,18 +15,25 @@ export class RegisterComponent {
     private router: Router) { }
 
   errorMessage: string = '';
+  noMatch = false;
 
   ngOnInit(): void {
-    /*     this.authService.getUser().subscribe(user => {
-          if (user) {
-            this.router.navigate(['/dashboard']); // Redirige a Dashboard si el usuario ya está autenticado
-          }
-        }); */
+    if (this.authService.getToken() != '') this.router.navigate(['/dashboard']);
   }
 
   async register(nuevo_usuario: NgForm) {
+    console.log('nuevo intento')
+    this.noMatch = false
+    this.errorMessage = '';
 
-    this.errorMessage = ''; // Limpiar mensaje de error antes de intentar registrar
+    const formulario = nuevo_usuario.value;
+    console.log(formulario)
+
+    if (formulario.password != formulario.confirm_password) {
+      this.noMatch = true
+      return
+    }
+
     console.log(nuevo_usuario.value)
     this.authService.register(nuevo_usuario.value).subscribe({
       next: (response) => {
