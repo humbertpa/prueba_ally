@@ -3,11 +3,8 @@ const mysql = require('mysql2/promise');
 require('dotenv').config();
 
 const bodyParser = require('body-parser');
-const { hash } = require('bcrypt');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-/* const { format } = require('mysql'); */
-const moment = require('moment');
 const { format } = require('date-fns');
 
 
@@ -101,6 +98,8 @@ app.post('/login', async (req, res) => {
 
         console.log("todo salio bien");
         console.log(user);
+        const formattedDate = format(new Date(), "yyyy-MM-dd hh:mm:ss a");
+        await db.query("UPDATE usuarios SET ultimoIngreso = ? where email = ?", [formattedDate, email])
 
         const token = jwt.sign({ email: user[0].email }, 'secret_key', { expiresIn: '1h' });
         return res.send({ status: true, mensaje: 'Inicio de sesión exitoso', token })
@@ -110,6 +109,44 @@ app.post('/login', async (req, res) => {
         res.status(500).send("Error en la base de datos");
     }
 });
+
+app.get('/usuarios', auth, async (req, res) => {
+    try {
+        let consulta = 'SELECT * FROM usuarios'
+        let [users] = await db.query(consulta, [req.email]);
+        return res.send({ status: true, mensaje: 'Usuarios consultados exitosamete', datos: users })
+    } catch (error) {
+        return res.send({ status: false, mensaje: 'Error al consultar usuarios' })
+    }
+});
+
+async function auth(req, res, next) {
+    console.log(req.headers)
+    const token = req.header('Authorization').split(' ')[1];
+    if (!token) return res.status(401).send('Acceso denegado. Token no provisto');
+
+
+    try {
+
+        const decoded = jwt.verify(token, JWT_SECRET);
+        console.log(decoded)
+        let consulta = 'SELECT * FROM usuarios where email = ?'
+        let [user] = await db.query(consulta, [decoded.email]);
+        console.log(user)
+
+        if (user.length == 0) {
+            console.log("Usuario no encontrado")
+            return res.send({ status: false, mensaje: 'Usuario no encontrado' })
+        }
+
+        req.email = decoded.email
+
+        next();
+    } catch (ex) {
+        console.error('Error al verificar el token:', ex);
+        return res.send({ status: false, mensaje: 'Token no válido' })
+    }
+}
 
 app.listen(3000)
 console.log('Servidor en puerto 3000')
