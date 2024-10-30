@@ -23,7 +23,6 @@ export class LoginComponent {
     if (this.authService.getToken() != '') this.router.navigate(['/dashboard']);
   }
 
-  // Método para manejar el login
   async login() {
     this.errorMessage = '';
     this.authService.login({ email: this.email, password: this.password }).subscribe({

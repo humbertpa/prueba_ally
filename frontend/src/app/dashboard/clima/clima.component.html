@@ -1,55 +1,64 @@
 <div class="clima-container">
-    <div class="column">
-        <div class="card">
-            <h3>PAIS SELECCIONADO</h3>
-            <ul>
-                <li>{{capital.country}}</li>
-                <li>{{"Capital: "+capital.name}}</li>
-                <li>{{"Region: "+capital.region}}</li>
-                <li>{{"Latitud: "+capital.lat}} {{"Longitud: "+capital.lon}}</li>
-
-            </ul>
-        </div>
-        <div class="card">
-            <h3>Otras tareas</h3>
-        </div>
+  <div class="column">
+    <div class="card">
+      <h3>PAIS SELECCIONADO</h3>
+      <ul>
+        <li>{{ capital.country }}</li>
+        <li>{{ "Capital: " + capital.name }}</li>
+        <li>{{ "Region: " + capital.region }}</li>
+        <li>
+          {{ "Latitud: " + capital.lat }} {{ "Longitud: " + capital.lon }}
+        </li>
+      </ul>
     </div>
-    <div class="column">
-        <div class="card">
-            <h3>CLIMA</h3>
-            <div class="clima">
-                <img src="{{clima.condition.icon}}" alt="">
-                <ul>
-                    <li>{{clima.temp_c+'°C'}}</li>
-                    <li>{{clima.condition.text}}</li>
-                </ul>
-
-            </div>
-        </div>
-        <div class="card">
-            <h3>Zonas horarias disponibles</h3>
-            <ul>
-                <li *ngFor="let zona of zonas" (click)="obtenerHora(zona)">{{zona}}</li>
-            </ul>
-        </div>
-        <div class="card">
-            <h3>Hora</h3>
-            <ul>
-                <li>{{hora.fecha}}</li>
-                <li>{{hora.zona}}</li>
-            </ul>
-
-
-        </div>
+    <div class="card">
+      <h3>Otras tareas</h3>
+      <ul class="tareas">
+        <li *ngFor="let tarea of lista_tareas">
+          <span class="dot"></span>{{ tarea }}
+        </li>
+      </ul>
     </div>
-    <div class="column">
-        <div class="card">
-            <h3>PAISES DISPONIBLES</h3>
-            <ul>
-                <li *ngFor="let pa of paises; index as i" (click)='obtenerClima(pa)'> <img [src]="banderas[i]"
-                        alt="{{pa}}">
-                    {{pa}}</li>
-            </ul>
-        </div>
+  </div>
+  <div class="column">
+    <div class="card">
+      <h3>CLIMA</h3>
+      <div class="clima">
+        <img src="{{ clima.condition.icon }}" alt="" />
+        <ul>
+          <li>{{ clima.temp_c + "°C" }}</li>
+          <li>{{ clima.condition.text }}</li>
+        </ul>
+      </div>
     </div>
+    <div class="card">
+      <h3>Zonas horarias disponibles</h3>
+      <ul>
+        <li
+          class="zhoraria"
+          *ngFor="let zona of zonas"
+          (click)="obtenerHora(zona)"
+        >
+          {{ zona }}
+        </li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Hora</h3>
+      <ul>
+        <li>{{ hora.fecha }}</li>
+        <li>{{ hora.zona }}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card">
+      <h3>PAISES DISPONIBLES</h3>
+      <ul>
+        <li *ngFor="let pa of paises; index as i" (click)="obtenerClima(pa)">
+          <img [src]="banderas[i]" alt="{{ pa }}" /> {{ pa }}
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

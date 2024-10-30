@@ -1,3 +1,5 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
+
 .background-container {
   position: absolute;
   top: 0;
@@ -28,7 +30,7 @@
 }
 
 .sidebar {
-  background-color: red;
+  background-color: rgb(255, 255, 255);
   margin-right: 10px;
   height: 100%;
   width: 15%;
@@ -44,47 +46,35 @@
   font-style: normal;
 }
 
-.card {
+.dropdown-menu {
   display: flex;
   flex-direction: column;
-  border-radius: 5px;
-  background-color: rgb(237, 237, 237);
-  margin-bottom: 25px;
-  overflow: hidden;
-  box-shadow: 1px 1px 8px #b5b5b5;
 }
 
-.clima {
-  display: flex;
-  background-color: white;
-}
-
-ul {
-  background-color: white;
-  margin: 0;
-  padding: 20px 0 20px 20px;
-  list-style-type: none;
-}
-
-li {
-  margin-bottom: 5px;
-}
-
-.column {
+.dropdown-content {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  padding: 10px;
-  height: 100%;
+  background: none;
+  min-width: 160px;
+  overflow: auto;
+  z-index: 5;
 }
 
-h3 {
-  width: 100%;
-  color: #6495ed;
-  padding-left: 20px;
+button,
+a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 20px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: normal;
+  text-decoration: none;
+  color: rgb(100, 100, 100);
 }
 
-img {
-  width: 50px;
-  height: 50px;
+button {
+  font-weight: bold;
 }

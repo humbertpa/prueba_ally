@@ -18,6 +18,25 @@
   box-shadow: 1px 1px 8px #b5b5b5;
 }
 
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: orange;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.zhoraria {
+  color: #0160f1;
+}
+
+.zhoraria:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .clima {
   display: flex;
   background-color: white;
@@ -31,6 +50,8 @@ ul {
 }
 
 li {
+  display: flex;
+  align-items: center;
   margin-bottom: 5px;
 }
 
@@ -53,4 +74,5 @@ h3 {
 img {
   width: 50px;
   height: 50px;
+  padding: 15px;
 }

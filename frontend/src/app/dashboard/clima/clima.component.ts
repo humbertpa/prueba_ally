@@ -1,6 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
+import { json } from 'body-parser';
 import { environment } from 'src/environments/environment.development';
 
 @Component({
@@ -21,10 +22,12 @@ export class ClimaComponent implements OnInit {
   clima: any
   capital: any
   hora: any
+  lista_tareas: string[] = []
 
 
   async ngOnInit(): Promise<void> {
     this.obtenerClima('Mexico')
+    this.tareas()
   }
 
   async obtenerClima(pais: string): Promise<void> {
@@ -43,7 +46,6 @@ export class ClimaComponent implements OnInit {
       this.obtenerHora(this.zonas[0])
       this.clima = response.data.current
       this.capital = response.data.location
-      console.log(JSON.stringify(response.data));
       return response.data
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -53,13 +55,22 @@ export class ClimaComponent implements OnInit {
   async obtenerHora(zona: string): Promise<void> {
     try {
       const response = await axios.get(`http://worldtimeapi.org/api/timezone/${zona}`)
-      console.log(JSON.stringify(response.data));
       const datetime = new Date(response.data.datetime);
       console.log(datetime)
       const formattedDate = formatDate(datetime, 'dd/MM/yyyy hh:mm:ss a', 'en-US', response.data.utc_offset);
       this.hora = { fecha: formattedDate, zona }
       console.log(formattedDate)
 
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+
+  async tareas() {
+    try {
+      const response = await axios.get("https://retoolapi.dev/oCI0kn/data/")
+      console.log(response.data)
+      this.lista_tareas = response.data.map((item: any) => item.tarea);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
