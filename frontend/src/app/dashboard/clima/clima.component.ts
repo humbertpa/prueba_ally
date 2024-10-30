@@ -39,7 +39,7 @@ export class ClimaComponent implements OnInit {
         q: pais_eng
       }
 
-      const response = await axios.get('http://api.weatherapi.com/v1//current.json', { params });
+      const response = await axios.get('https://api.weatherapi.com/v1//current.json', { params });
 
       this.zonas = pais_eng == 'mexico' ? this.mx : pais_eng == 'germany' ? this.al : this.fr
       this.obtenerHora(this.zonas[0])
@@ -53,7 +53,7 @@ export class ClimaComponent implements OnInit {
 
   async obtenerHora(zona: string): Promise<void> {
     try {
-      const response = await axios.get(`http://worldtimeapi.org/api/timezone/${zona}`)
+      const response = await axios.get(`https://worldtimeapi.org/api/timezone/${zona}`)
       const datetime = new Date(response.data.datetime);
       console.log(datetime)
       const formattedDate = formatDate(datetime, 'dd/MM/yyyy hh:mm:ss a', 'en-US', response.data.utc_offset);
