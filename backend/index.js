@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require('mysql2/promise');
 require('dotenv').config();
+const cors = require('cors');
 
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
@@ -12,7 +13,11 @@ const { format } = require('date-fns');
 
 const port = process.env.PORT || 3000;
 const app = express();
-
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(bodyParser.json());
 
 const db = mysql.createPool({
@@ -37,10 +42,10 @@ app.get("/ping", async (req, res) => {
     }
 });
 
-const JWT_SECRET = 'secret_key';
 const TOKEN_EXPIRATION = '1h';
 
 app.post('/register', async (req, res) => {
+    console.log(req.body)
     const { email, password, nombre } = req.body
     try {
         let consulta = 'SELECT * FROM usuarios where email = ?'
@@ -53,7 +58,7 @@ app.post('/register', async (req, res) => {
         }
 
         const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await hash(password, salt);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
         const formattedDate = format(new Date(), "yyyy-MM-dd hh:mm:ss a");
         console.log(formattedDate);
@@ -69,7 +74,7 @@ app.post('/register', async (req, res) => {
         console.log([user])
 
         console.log(user[0])
-        const token = jwt.sign({ email: user[0].email }, JWT_SECRET, { expiresIn: TOKEN_EXPIRATION });
+        const token = jwt.sign({ email: user[0].email }, process.env.JWT_SECRET, { expiresIn: TOKEN_EXPIRATION });
         return res.send({ status: true, mensaje: 'Usuario registrado correctamente', token })
     } catch (err) {
         console.error("Error en la consulta:", err);
@@ -101,7 +106,7 @@ app.post('/login', async (req, res) => {
         const formattedDate = format(new Date(), "yyyy-MM-dd hh:mm:ss a");
         await db.query("UPDATE usuarios SET ultimoIngreso = ? where email = ?", [formattedDate, email])
 
-        const token = jwt.sign({ email: user[0].email }, 'secret_key', { expiresIn: '1h' });
+        const token = jwt.sign({ email: user[0].email }, process.env.JWT_SECRET, { expiresIn: '1h' });
         return res.send({ status: true, mensaje: 'Inicio de sesión exitoso', token })
 
     } catch (err) {
@@ -112,11 +117,11 @@ app.post('/login', async (req, res) => {
 
 app.get('/usuarios', auth, async (req, res) => {
     try {
-        let consulta = 'SELECT * FROM usuarios'
+        let consulta = 'SELECT email,nombre,fechaRegistro,ultimoIngreso FROM usuarios'
         let [users] = await db.query(consulta, [req.email]);
-        return res.send({ status: true, mensaje: 'Usuarios consultados exitosamete', datos: users })
+        return res.send({ status: true, datos: users })
     } catch (error) {
-        return res.send({ status: false, mensaje: 'Error al consultar usuarios' })
+        return res.send({ status: false })
     }
 });
 
@@ -128,7 +133,7 @@ async function auth(req, res, next) {
 
     try {
 
-        const decoded = jwt.verify(token, JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         console.log(decoded)
         let consulta = 'SELECT * FROM usuarios where email = ?'
         let [user] = await db.query(consulta, [decoded.email]);

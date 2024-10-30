@@ -5,7 +5,8 @@ const checkSign = '\u{2705}';
 const dotenv = require('dotenv').config({ path: '.env' });;
 
 const envFile = `export const environment = {
-    weatherApiKey: "${process.env.WEATHER_API_KEY}"
+    weatherApiKey: "${process.env.WEATHER_API_KEY}",
+    backendUrl: "${process.env.BACKEND_URL}"
 };`;
 
 const targetPath = path.join(__dirname, 'src/environments/environment.development.ts');

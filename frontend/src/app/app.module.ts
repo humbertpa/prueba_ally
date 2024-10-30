@@ -9,6 +9,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ClimaComponent } from './dashboard/clima/clima.component';
+import { HttpClientModule } from '@angular/common/http';
+import { UsuariosComponent } from './dashboard/usuarios/usuarios.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { ClimaComponent } from './dashboard/clima/clima.component';
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    ClimaComponent
+    ClimaComponent,
+    UsuariosComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,8 @@ import { ClimaComponent } from './dashboard/clima/clima.component';
     AppRoutingModule,
     BrowserModule,
     FormsModule,
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

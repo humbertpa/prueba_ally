@@ -1,0 +1,50 @@
+<div class="usuarios-container">
+    <div class="fila">
+        <div class="opciones">
+            <button>PDF</button>
+            <button>Copy</button>
+            <button>Excel</button>
+            <button>Imprimir</button>
+            <button>Columnas</button>
+            <button>Mostrar</button>
+        </div>
+        <div class="search">
+            <label for="search">Filtrar:</label>
+            <input type="text" id="search">
+        </div>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Fecha Registro</th>
+                <th>Último Login</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usuario of usuarios">
+                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.fechaRegistro | date:'shortDate' }}</td> <!-- Formato de fecha -->
+                <td>{{ usuario.ultimoLogin | date:'shortDate' }}</td> <!-- Formato de fecha -->
+            </tr>
+        </tbody>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Fecha Registro</th>
+                <th>Último Login</th>
+            </tr>
+        </thead>
+    </table>
+    <p>Mostrando registros del 1 al {{usuarios.length}}</p>
+    <div class="tabs">
+        <button>Primero</button>
+        <button>Anterior</button>
+        <button>1</button>
+        <button>Siguiente</button>
+        <button>Último</button>
+    </div>
+</div>

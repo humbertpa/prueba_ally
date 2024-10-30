@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-//import { AngularFireAuth } from '@angular/fire/auth';
-//import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-/* import { AuthService } from '../../services/auth/auth.service'; */
 import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +11,7 @@ import { NgForm } from '@angular/forms';
 export class RegisterComponent {
 
   constructor(
-    /*  private authService: AuthService, */
+    private authService: AuthService,
     private router: Router) { }
 
   errorMessage: string = '';
@@ -28,11 +26,24 @@ export class RegisterComponent {
 
   async register(nuevo_usuario: NgForm) {
 
-    /*     this.errorMessage = ''; // Limpiar mensaje de error antes de intentar registrar
-        const result = await this.authService.register(nuevo_usuario.value);
-        if (result) {
-          this.errorMessage = result; // Mostrar el mensaje de error
-        } */
+    this.errorMessage = ''; // Limpiar mensaje de error antes de intentar registrar
+    console.log(nuevo_usuario.value)
+    this.authService.register(nuevo_usuario.value).subscribe({
+      next: (response) => {
+        if (response.status) {
+          console.log('Usuario creado correctamente:', response);
+          if (response.token) {
+            this.authService.setToken(response.token)
+            this.router.navigate(['/dashboard']);
+          }
+        } else {
+          this.errorMessage = response.mensaje;
+        }
+      },
+      error: (err) => {
+        console.error('Error en la solicitud de login:', err);
+        this.errorMessage = 'Error al registrar usuario. Inténtalo más tarde.';
+      }
+    });
   }
-
 }
