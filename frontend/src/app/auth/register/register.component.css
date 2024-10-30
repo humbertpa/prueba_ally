@@ -50,9 +50,10 @@ input[type="text"]:focus {
   width: 100%;
   padding: 15px 0 0 0;
   column-gap: 15px;
-  div {
-    width: 50%;
-  }
+}
+
+.passwords div {
+  width: 50%;
 }
 
 input[type="submit"] {

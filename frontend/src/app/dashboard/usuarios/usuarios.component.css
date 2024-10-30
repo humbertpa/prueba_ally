@@ -1,5 +1,3 @@
-@import "~@fortawesome/fontawesome-free/css/all.css";
-
 .usuarios-container {
   background-color: white;
   width: 100%;
@@ -29,29 +27,27 @@ h3 {
   justify-content: space-between;
   padding: 20px 20px 0 20px;
   margin-bottom: 20px;
-  input {
-    border-radius: 3px;
-  }
+}
+input {
+  border-radius: 3px;
 }
 
 .btn-group {
   border-radius: 5px;
   overflow: hidden;
-
-  button {
-    background-color: #0160f1;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    font-size: 13px;
-  }
 }
-
+button {
+  background-color: #0160f1;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  font-size: 13px;
+}
 table {
   margin: 0 20px;
 }
@@ -73,32 +69,35 @@ p {
 }
 .fila-pagination {
   display: flex;
-  justify-content: end;
+  flex-direction: row;
   padding: 20px;
 }
+
 .pagination {
   display: flex;
   align-items: center;
+  margin-left: auto;
   border: 1px solid #ccc;
   border-radius: 5px;
-  a {
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-    transition: background-color 0.3s;
-    border-left: 1px solid #ccc;
-  }
-  a:first-child {
-    border: none;
-  }
-  span {
-    display: flex;
-    align-items: center;
-    border-left: 2px solid #ddd;
-    padding: 0 10px;
-    height: 100%;
-    background-color: #0160f1;
-    color: white;
-  }
+}
+
+a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  border-left: 1px solid #ccc;
+}
+a:first-child {
+  border: none;
+}
+span {
+  display: flex;
+  align-items: center;
+  border-left: 2px solid #ddd;
+  padding: 0 10px;
+  height: 100%;
+  background-color: #0160f1;
+  color: white;
 }
