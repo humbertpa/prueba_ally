@@ -10,6 +10,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.seleccionar('btn-1')
   }
+  
   dropdownVisible = false
 
   toggleDropdown() {
