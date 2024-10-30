@@ -29,7 +29,7 @@ import { UsuariosComponent } from './dashboard/usuarios/usuarios.component';
     BrowserModule,
     FormsModule,
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

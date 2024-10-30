@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { UsuariosService } from 'src/app/shared/services/usuarios.service';
 
 @Component({
@@ -8,7 +10,8 @@ import { UsuariosService } from 'src/app/shared/services/usuarios.service';
 })
 export class UsuariosComponent implements OnInit {
 
-  constructor(private usuariosService: UsuariosService) { }
+  constructor(private usuariosService: UsuariosService, private authService: AuthService, private router: Router
+  ) { }
 
   errorMessage: string = ''
   usuarios: any[] = []
@@ -22,6 +25,8 @@ export class UsuariosComponent implements OnInit {
           this.usuarios = response.datos;
         } else {
           this.errorMessage = 'Error al obtener usuarios';
+          this.authService.clearToken();
+          this.router.navigate(['/login']);
         }
       },
       error: (err) => {

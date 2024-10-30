@@ -1,50 +1,58 @@
 <div class="usuarios-container">
-    <div class="fila">
-        <div class="opciones">
-            <button>PDF</button>
-            <button>Copy</button>
-            <button>Excel</button>
-            <button>Imprimir</button>
-            <button>Columnas</button>
-            <button>Mostrar</button>
-        </div>
-        <div class="search">
-            <label for="search">Filtrar:</label>
-            <input type="text" id="search">
-        </div>
+  <h3>Usuarios</h3>
+  <div class="fila">
+    <div class="btn-group">
+      <button><i class="fas fa-file-pdf"></i> PDF</button>
+      <button><i class="fa fa-copy"></i> Copy</button>
+      <button><i class="fa fa-file-excel"></i> Excel</button>
+      <button><i class="fa fa-print" aria-hidden="true"></i> Imprimir</button>
+      <button>
+        <i class="fa fa-columns" aria-hidden="true"></i> Columnas
+        <i class="fa fa-caret-down" aria-hidden="true"></i>
+      </button>
+      <button>
+        Mostrar <i class="fa fa-caret-down" aria-hidden="true"></i>
+      </button>
     </div>
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Fecha Registro</th>
-                <th>Último Login</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let usuario of usuarios">
-                <td>{{ usuario.nombre }}</td>
-                <td>{{ usuario.email }}</td>
-                <td>{{ usuario.fechaRegistro | date:'shortDate' }}</td> <!-- Formato de fecha -->
-                <td>{{ usuario.ultimoLogin | date:'shortDate' }}</td> <!-- Formato de fecha -->
-            </tr>
-        </tbody>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Fecha Registro</th>
-                <th>Último Login</th>
-            </tr>
-        </thead>
-    </table>
-    <p>Mostrando registros del 1 al {{usuarios.length}}</p>
-    <div class="tabs">
-        <button>Primero</button>
-        <button>Anterior</button>
-        <button>1</button>
-        <button>Siguiente</button>
-        <button>Último</button>
+    <div class="search">
+      <label for="search">Filtrar: </label>
+      <input type="text" id="search" />
     </div>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre <i class="fa fa-sort" aria-hidden="true"></i></th>
+        <th>Email <i class="fa fa-sort" aria-hidden="true"></i></th>
+        <th>Fecha Registro <i class="fa fa-sort" aria-hidden="true"></i></th>
+        <th>Último Login <i class="fa fa-sort" aria-hidden="true"></i></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.nombre }}</td>
+        <td>{{ usuario.email }}</td>
+        <td>{{ usuario.fechaRegistro }}</td>
+        <td>{{ usuario.ultimoIngreso }}</td>
+      </tr>
+    </tbody>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Fecha Registro</th>
+        <th>Último Login</th>
+      </tr>
+    </thead>
+  </table>
+  <p>Mostrando registros del 1 al {{ usuarios.length }}</p>
+  <div class="fila-pagination">
+    <div class="pagination">
+      <a>Primero</a>
+      <a>Anterior</a>
+      <span>1</span>
+      <a>Siguiente</a>
+      <a>Último</a>
+    </div>
+  </div>
 </div>
