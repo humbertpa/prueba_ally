@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { provideAuth0 } from '@auth0/auth0-angular';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +13,10 @@ import { FormsModule } from '@angular/forms';
 import { ClimaComponent } from './dashboard/clima/clima.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UsuariosComponent } from './dashboard/usuarios/usuarios.component';
+import { environment } from '../environments/environment';
+import { AuthButtonComponent } from './auth/auth-button/auth-button.component'
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +24,8 @@ import { UsuariosComponent } from './dashboard/usuarios/usuarios.component';
     RegisterComponent,
     DashboardComponent,
     ClimaComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    AuthButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +37,15 @@ import { UsuariosComponent } from './dashboard/usuarios/usuarios.component';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    provideAuth0({
+      domain: environment.domain,
+      clientId: environment.clientId,
+      authorizationParams: {
+        redirect_uri: window.location.origin
+      }
+    }),
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

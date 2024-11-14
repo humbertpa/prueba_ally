@@ -1,16 +1,16 @@
 <div class="login-container">
-    <div class="login-title">
-        Login
-    </div>
-    <form (ngSubmit)="login()">
-        <label for="email">Email</label>
-        <input type="email" [(ngModel)]="email" name="email" required>
-        <label for="password">Password</label>
-        <input type="password" [(ngModel)]="password" name="password" required>
-        <input type="submit" value="Login">
-        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-    </form>
-    <div class="login-register">
-        <a href="/register">Necesitas una cuenta? Registrate!</a>
-    </div>
+  <div class="login-title">Login</div>
+  <form (ngSubmit)="login()">
+    <label for="email">Email</label>
+    <input type="email" [(ngModel)]="email" name="email" required />
+    <label for="password">Password</label>
+    <input type="password" [(ngModel)]="password" name="password" required />
+    <input type="submit" value="Login" />
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  </form>
+
+  <app-auth-button></app-auth-button>
+  <div class="login-register">
+    <a href="/register">Necesitas una cuenta? Registrate!</a>
+  </div>
 </div>
