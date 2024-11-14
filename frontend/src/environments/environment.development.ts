@@ -1,4 +1,4 @@
 export const environment = {
-    weatherApiKey: "1f8047080b7a40fb8dc04901242610",
+    weatherApiKey: "1d77481cfc8d4da8987223131241311",
     backendUrl: "https://prueba-ally.onrender.com"
 };

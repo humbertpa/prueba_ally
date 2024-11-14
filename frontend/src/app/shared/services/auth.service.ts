@@ -12,7 +12,6 @@ export class AuthService {
   loginStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private httpClient: HttpClient) {
-
     this.loginStatus.next(this.tokenExist())
   }
 

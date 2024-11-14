@@ -8,9 +8,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { format } = require('date-fns');
 
-
-
-
 const port = process.env.PORT || 3000;
 const app = express();
 app.use(cors({

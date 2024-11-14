@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../shared/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,14 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
+  constructor(private authService: AuthService, private router: Router) { }
+
   ngOnInit() {
     this.seleccionar('btn-1')
+    
   }
-  
+
   dropdownVisible = false
 
   toggleDropdown() {
     this.dropdownVisible = !this.dropdownVisible
+  }
+
+  async logOut() {
+    this.authService.clearToken()
+    window.location.reload()
   }
 
   seleccionar(boton: string) {
