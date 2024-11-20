@@ -42,6 +42,7 @@ import { AuthButtonComponent } from './auth/auth-button/auth-button.component'
       domain: environment.domain,
       clientId: environment.clientId,
       authorizationParams: {
+        audience: environment.apiId,
         redirect_uri: window.location.origin
       }
     }),

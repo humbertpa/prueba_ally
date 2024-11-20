@@ -3,5 +3,5 @@ export const environment = {
     backendUrl: "http://localhost:3000",
     domain: "dev-5orghgqbgkc3fl1k.us.auth0.com",
     clientId: "8ACqgl4ta40xHPgqGgaYd2b6fKpz6NTP",
-
+    apiId: "https://mi-api.com"
 };
