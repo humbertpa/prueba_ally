@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../shared/services/auth.service';
+import { AuthService as Auth0 } from '@auth0/auth0-angular';
+import { AuthService as LocalAuth } from 'src/app/shared/services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,11 +10,10 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private localAuth: LocalAuth, public auth0: Auth0, private router: Router) { }
 
   ngOnInit() {
     this.seleccionar('btn-1')
-    
   }
 
   dropdownVisible = false
@@ -23,7 +23,14 @@ export class DashboardComponent implements OnInit {
   }
 
   async logOut() {
-    this.authService.clearToken()
+
+    const fuente = this.localAuth.getAuthSource()
+
+    this.localAuth.clearToken()
+    if (fuente === 'auth0') {
+      this.auth0.logout({ logoutParams: { returnTo: document.location.origin } })
+      return;
+    }
     window.location.reload()
   }
 

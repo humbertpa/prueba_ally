@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-/* import { AuthService } from '../../services/auth/auth.service'; */
+import { Component, OnInit } from '@angular/core';
+import { AuthService as LocalAuth } from 'src/app/shared/services/auth.service';
+import { AuthService as Auth0 } from '@auth0/auth0-angular';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,28 +9,32 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   email: string = '';
   password: string = '';
   errorMessage: string = '';
 
   constructor(
-    private authService: AuthService,
+    private localAuth: LocalAuth,
+    private auth0: Auth0,
     private router: Router) { }
 
   ngOnInit(): void {
-    if (this.authService.getToken() != '') this.router.navigate(['/dashboard']);
+
+    if (this.localAuth.getToken() != '') this.router.navigate(['/dashboard']);
   }
 
   async login() {
     this.errorMessage = '';
-    this.authService.login({ email: this.email, password: this.password }).subscribe({
+    console.log("Se presionó el boton de login")
+    this.localAuth.login({ email: this.email, password: this.password }).subscribe({
       next: (response) => {
         if (response.status) {
           console.log('Inicio de sesión exitoso:', response);
           if (response.token) {
-            this.authService.setToken(response.token)
+            this.localAuth.setToken(response.token)
+            this.localAuth.setAuthSource('local')
             this.router.navigate(['/dashboard']);
           }
         } else {

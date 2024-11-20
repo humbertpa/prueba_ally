@@ -28,13 +28,23 @@ export class AuthService {
     localStorage.setItem('token', token);
   }
 
+  setAuthSource(source: string) {
+    localStorage.setItem('authSource', source);
+  }
+
   getToken(): string {
     return localStorage.getItem('token') || '';
   }
 
+  getAuthSource(): string {
+    return localStorage.getItem('authSource') || '';
+  }
+
   clearToken() {
     localStorage.removeItem('token');
+    localStorage.removeItem('authSource')
   }
+
 
   tokenExist(): boolean {
     return !!this.getToken() ? true : false;
