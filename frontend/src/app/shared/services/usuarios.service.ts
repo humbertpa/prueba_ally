@@ -12,8 +12,12 @@ export class UsuariosService {
 
   obtener(): Observable<any> {
     const token = localStorage.getItem('token');
-    const httpHeaders = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const authSource = localStorage.getItem('authSource');
 
-    return this.httpClient.get<any>(environment.backendUrl + '/usuarios', { headers: httpHeaders })
+    let httpHeaders = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    const url = `${environment.backendUrl}/usuarios?authSource=${authSource}`;
+
+    return this.httpClient.get<any>(url, { headers: httpHeaders });
   }
 }

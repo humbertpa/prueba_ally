@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require('mysql2/promise');
+
 require('dotenv').config();
 const cors = require('cors');
 
@@ -112,7 +113,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.get('/usuarios', auth, async (req, res) => {
+app.get('/usuarios', authMw, async (req, res) => {
     try {
         let consulta = 'SELECT email,nombre,fechaRegistro,ultimoIngreso FROM usuarios'
         let [users] = await db.query(consulta, [req.email]);
@@ -121,18 +122,51 @@ app.get('/usuarios', auth, async (req, res) => {
         return res.send({ status: false })
     }
 });
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 
-async function auth(req, res, next) {
-    console.log(req.headers)
+const { requiredScopes } = require('express-oauth2-jwt-bearer');
+const { auth } = require('express-oauth2-jwt-bearer');
+const axios = require('axios');
+
+const checkScopes = requiredScopes('email');
+const checkJwt = auth({
+    audience: "https://mi-api.com",
+    issuerBaseURL: `https://dev-5orghgqbgkc3fl1k.us.auth0.com`,
+});
+
+
+
+async function authMw(req, res, next) {
+    //    console.log("Impreso desde el backend")
+    //    console.log(req.query)
+    //    console.log(req.headers.authorization)
+
+    const authSource = req.query.authSource
+
     const token = req.header('Authorization').split(' ')[1];
     if (!token) return res.status(401).send('Acceso denegado. Token no provisto');
 
+    let email = ''
 
-    try {
+    if (authSource == 'local') {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         console.log(decoded)
+    } else if (authSource == 'auth0') {
+
+        const headers = {
+            'Authorization': req.headers.authorization,
+        };
+
+        console.log(headers)
+
+        const response = await axios.get('https://dev-5orghgqbgkc3fl1k.us.auth0.com/userinfo', { headers })
+        email = response.data.email
+    }
+
+    try {
         let consulta = 'SELECT * FROM usuarios where email = ?'
-        let [user] = await db.query(consulta, [decoded.email]);
+        let [user] = await db.query(consulta, [email]);
         console.log(user)
 
         if (user.length == 0) {
@@ -140,7 +174,7 @@ async function auth(req, res, next) {
             return res.send({ status: false, mensaje: 'Usuario no encontrado' })
         }
 
-        req.email = decoded.email
+        req.email = email
 
         next();
     } catch (ex) {
